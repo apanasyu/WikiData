@@ -5,7 +5,8 @@ https://dumps.wikimedia.org/wikidatawiki/entities/
 This is a 72 GB file as of Jan 6 2022.
 
 Step 1:
-Go through bz2 file line by line and see if a Twitter person is mentioned 
+Go through bz2 file line by line and see if a Twitter person is mentioned:
+
         with open(ModWikiDumpPath, 'w') as fWrite:
             with bz2.open(WikiOriginalFilepath, mode='rt') as fRead:
                 firstTwoBytes = fRead.read(2)  # skip first two bytes: "[\n"
@@ -18,3 +19,5 @@ Go through bz2 file line by line and see if a Twitter person is mentioned
                     except json.decoder.JSONDecodeError:
                         continue
             fWrite.write("]\n")
+
+![image](https://user-images.githubusercontent.com/80060152/111919672-94edb800-8a61-11eb-8ecd-4f4c98b33854.png)
