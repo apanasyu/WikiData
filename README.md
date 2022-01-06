@@ -20,4 +20,7 @@ Go through bz2 file line by line and see if a Twitter person is mentioned:
                         continue
             fWrite.write("]\n")
 
-![image](https://user-images.githubusercontent.com/80060152/111919672-94edb800-8a61-11eb-8ecd-4f4c98b33854.png)
+The reason we are focussing on Twitter is because it is the most popular. See file SPARQLQueryDirectly.py function recordSocialSiteInfo:
+All of the Wikidata Property IDs can be found via query: query ?x wdt:P31 wd:Q105388954
+![image](https://user-images.githubusercontent.com/80060152/148462393-55e0a641-3771-43eb-bed1-810373489f15.png)!
+
