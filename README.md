@@ -1,7 +1,7 @@
 # Social Media Types
 We are focussing on Twitter because it is the most popular. See file SPARQLQueryDirectly.py function recordSocialSiteInfo():
 All of the Wikidata Property IDs can be found via query: query ?item wdt:P31 wd:Q105388954
-![image](https://user-images.githubusercontent.com/80060152/148462393-55e0a641-3771-43eb-bed1-810373489f15.png)!
+![image](https://user-images.githubusercontent.com/80060152/148462393-55e0a641-3771-43eb-bed1-810373489f15.png)
 
 Here are the top 10 out of 64 most popular social media accounts to be listed (for query from November 2021):
         id	Number Wiki Pages	English Label
