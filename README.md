@@ -46,7 +46,7 @@ Step 2: The TwitterRelatedRecords.json from step 1 is used. We go through file l
 
 First there are close to 10,000 Wikidata properties (9288).
 We utilize SPARQLQueryDirectly.py method getPropertyUsagePerTwitterUser() in order to focus on most popular Wikidata properties for pages that have a social media Twitter account. An Excel spreadsheet is generated that contains the property, property English description, how many Twitter users contained the property. Here is a snapshot of top properties:
-![image](https://user-images.githubusercontent.com/80060152/148464723-f68e9441-a1d3-40b6-9439-476360abdf2e.png)!
+![image](https://user-images.githubusercontent.com/80060152/148464723-f68e9441-a1d3-40b6-9439-476360abdf2e.png)
 
 We went through the first ~400 most popular properties. These properties are recorded in WikiDataPropertiesOfInterest.py
 The properties that were found useful are recorded in MongoDB (the same exercise can be performed for other Social media or other Wikidata pages with reader having to filter out properties that would be useful for their application).
