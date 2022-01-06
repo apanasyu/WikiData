@@ -1,9 +1,3 @@
-# WikiData
-
-Download the latest WikiData dump as a .json.bz2 file from:
-https://dumps.wikimedia.org/wikidatawiki/entities/
-This is a 72 GB file as of Jan 6 2022.
-
 # Social Media Types
 We are focussing on Twitter because it is the most popular. See file SPARQLQueryDirectly.py function recordSocialSiteInfo():
 All of the Wikidata Property IDs can be found via query: query ?item wdt:P31 wd:Q105388954
@@ -23,7 +17,10 @@ Here are the top 10 out of 64 most popular social media accounts to be listed (f
         P3185	6804	                VK ID
 As the table shows Twitter, Facebook, and Instagram are by far the most popular.
 
-# Implementation
+# Working with WikiData
+Step 0: Download the latest WikiData dump as a .json.bz2 file from:
+https://dumps.wikimedia.org/wikidatawiki/entities/
+This is a 72 GB file as of Jan 6 2022.
 
 Step 1: This step produces a file that now contains only WikiData pages that mention a Twitter user name. A lot of WikiData is related to stars, chemicals, and other info that is not relevant to our use case.
 
