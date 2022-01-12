@@ -59,5 +59,36 @@ Of particular interest is the Twitter_Screen_Name field.
 Step 3: For all Twitter user screenanmes extracted (using Twitter_Screen_Name) the Twitter API is used to obtain recent up to date information on number of followers, Twitter user description, and other information. Here is a snapshot of this MongoDB table being explored using MongoDB compass. Some of the screennames may not be accurate or may be redundant across multiple wikidata pages (out of 308,365 Wikipages that mention a Twitter screenname, 284,105 are unique):
 ![image](https://user-images.githubusercontent.com/80060152/149199566-c79c576b-e0c5-4f18-aac8-cafa19e1d8da.png)
 
+Step 4: Having identified all of the Wikidata pages that contain a Twitter screenanme and having verified that the screenanme exists using the Twitter API, we now want to explore all of the QNodes that each user is connected to (call the QNode1). We first go through the MongoDB database and record all unique QNode1
+
+        db_name = "WikiDataTwitterUsers"
+        collectionName = "WikiDataInfoOnUsers"
+        Qnodes = collectQNodes(port, db_name, collectionName)
+
+This routine finds 171,779 QNode1; we go through the original json.bz2 WikiData dump and keep all of the entries that contain one of these QNode1. 
+
+        ModWikiDumpPath = '/home/aleksei1985/Desktop/WikiFiles/Qnodes.json'
+        getRecordsRelatedToQNodesOfInterestJSON(Qnodes, ModWikiDumpPath)
+        
+This data is written to MongoDB to table WikiDataInfoOnQNodes.
+
+        collectionName = "WikiDataInfoOnQNodes"
+        processWikiDump(ModWikiDumpPath, port, db_name, collectionName, includeTwitterScreenName=False)
+
+These steps are repeated a second time. In the second pass we are recording all of the Q nodes that are connected to QNode1 (call this Qnode2). 
+        db_name = "WikiDataTwitterUsers"
+        collectionName = "WikiDataInfoOnQNodes"
+        Qnodes = collectQNodes(port, db_name, collectionName)
+        ModWikiDumpPath = '/home/aleksei1985/Desktop/WikiFiles/Qnodes2.json'
+        getRecordsRelatedToQNodesOfInterestJSON(Qnodes, ModWikiDumpPath)
+        collectionName = "WikiDataInfoOnQNodes2"
+        processWikiDump(ModWikiDumpPath, port, db_name, collectionName, includeTwitterScreenName=False)
+
+In a way what has occured is we have Wikipages referencing Twitter screenname -> these are connected to QNode1 Wikipages -> these are connected to QNode2 Wikipages. The steps can be repeated to find additional QNode3 and beyond connections (but we limit to QNode2).
+For example, a real example: user1 -> Qnode1 associated with Philadelphia Museum -> QNode2 Pennsylvanya, USA (utilize real example and not a mocked up one)
+
+Step 5 (optional): A more readable version of MongoDB databases can be filled in where each Qnode id is followed by its English description.
 
 
+
+Step 6: We are interested in all QNodes with coordinates 
