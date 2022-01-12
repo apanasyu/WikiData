@@ -54,7 +54,9 @@ The properties that were found useful are recorded in MongoDB (the same exercise
 Here is a snapshot of this MongoDB table being explored using MongoDB compass:
 ![image](https://user-images.githubusercontent.com/80060152/149199336-62d252fd-fd4a-471b-a255-51f52820694a.png)
 
-Step 3: For all Twitter user screenanmes extracted the Twitter API is used to obtain recent up to date information on number of followers, Twitter user description, and other information. Here is a snapshot of this MongoDB table being explored using MongoDB compass:
+Of particular interest is the Twitter_Screen_Name field.
+
+Step 3: For all Twitter user screenanmes extracted (using Twitter_Screen_Name) the Twitter API is used to obtain recent up to date information on number of followers, Twitter user description, and other information. Here is a snapshot of this MongoDB table being explored using MongoDB compass. Some of the screennames may not be accurate or may be redundant across multiple wikidata pages (out of 308,365 Wikipages that mention a Twitter screenname, 284,105 are unique):
 ![image](https://user-images.githubusercontent.com/80060152/149199566-c79c576b-e0c5-4f18-aac8-cafa19e1d8da.png)
 
 
