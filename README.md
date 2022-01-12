@@ -40,7 +40,7 @@ Go through downloaded bz2 file line by line and see if a Twitter person is menti
                         continue
             fWrite.write("]\n")
 
-This step could take over 24 hours to execute. It results in a much more manageable file. File is TwitterRelatedRecords.json and is 1.1 GB.
+This step could take over 24 hours to execute. It results in a much more manageable file. File is TwitterRelatedRecords.json and is 5.3 GB.
 
 Step 2: The TwitterRelatedRecords.json from step 1 is used. We go through file line by line and record the Twitter user name and WikiData properties of interest to MongoDB for ease of querying. On linux we create a separate folder that will contain MongoDB files and call this command from terminal to setup an instance of MongoDB on port 27020: sudo mongod --port 27020 --dbpath "/media/aleksei1985/Seagate Expansion Drive/MongoDBWikiData/" (reader should have MongoDB running on 27020 pointing to their instance)
 
@@ -51,12 +51,11 @@ We utilize SPARQLQueryDirectly.py method getPropertyUsagePerTwitterUser() in ord
 We went through the first ~400 most popular properties. These properties are recorded in WikiDataPropertiesOfInterest.py
 The properties that were found useful are recorded in MongoDB (the same exercise can be performed for other Social media or other Wikidata pages with reader having to filter out properties that would be useful for their application).
 
-Here is a snapshot of this MongoDB database being explored using MongoDB compass:
+Here is a snapshot of this MongoDB table being explored using MongoDB compass:
+![image](https://user-images.githubusercontent.com/80060152/149199336-62d252fd-fd4a-471b-a255-51f52820694a.png)
 
-
-
-Step 3: For all Twitter user screenanmes extracted the Twitter API is used to obtain recent up to date information on number of followers, Twitter user description, and other information.
-
+Step 3: For all Twitter user screenanmes extracted the Twitter API is used to obtain recent up to date information on number of followers, Twitter user description, and other information. Here is a snapshot of this MongoDB table being explored using MongoDB compass:
+![image](https://user-images.githubusercontent.com/80060152/149199566-c79c576b-e0c5-4f18-aac8-cafa19e1d8da.png)
 
 
 
