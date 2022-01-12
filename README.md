@@ -75,7 +75,8 @@ This data is written to MongoDB to table WikiDataInfoOnQNodes.
         collectionName = "WikiDataInfoOnQNodes"
         processWikiDump(ModWikiDumpPath, port, db_name, collectionName, includeTwitterScreenName=False)
 
-These steps are repeated a second time. In the second pass we are recording all of the Q nodes that are connected to QNode1 (call this Qnode2). 
+These steps are repeated a second time. In the second pass we are recording all of the Q nodes that are connected to QNode1 (call this Qnode2).
+
         db_name = "WikiDataTwitterUsers"
         collectionName = "WikiDataInfoOnQNodes"
         Qnodes = collectQNodes(port, db_name, collectionName)
