@@ -127,11 +127,32 @@ These steps are repeated a second time. In the second pass we are recording all 
         collectionName = "WikiDataInfoOnQNodes2"
         processWikiDump(ModWikiDumpPath, port, db_name, collectionName, includeTwitterScreenName=False)
 
-In a way what has occured is we have Wikipages referencing Twitter screenname -> these are connected to QNode1 Wikipages -> these are connected to QNode2 Wikipages. The steps can be repeated to find additional QNode3 and beyond connections (but we limit to QNode2).
-For example, a real example: user1 -> Qnode1 associated with Philadelphia Museum -> QNode2 Pennsylvanya, USA (utilize real example and not a mocked up one)
+In a way what has occured is we have Wikipages referencing Twitter screenname -> these are connected to QNode1 Wikipages -> these are connected to QNode2 Wikipages. 
 
-Step 5 (optional): A more readable version of MongoDB databases can be filled in where each Qnode id is followed by its English description.
+Step 5: For each QNode record the corresponding country association (working of the "P17" relation that specifies country).
 
+        import pickle
+        QnodeToCountry = {}
+        collectionName = "WikiDataInfoOnQNodes"
+        QnodeToCountry = generateNodeToCountry(port, db_name, collectionName, QnodeToCountry)
+        collectionName = "WikiDataInfoOnQNodes2"
+        QnodeToCountry = generateNodeToCountry(port, db_name, collectionName, QnodeToCountry)
+        with open('QnodeToCountry.pickle', 'wb') as handle:
+            pickle.dump(QnodeToCountry, handle, protocol=pickle.HIGHEST_PROTOCOL)
+            
+Next for every QNode that the Twitter user is associated with we record all of the countries. For each user we are using the country that each user has the most relations to. For example if user j is (i) educated at USA, (ii) has country citizenship USA, and (iii) born in Brazil then the user j has connection to {USA: 2, BRA: 1} and so USA being the most frequent is the country assigned. We utilize this type of country association to compare against country data obtained via SocialBakers.
 
+        collectionNameRead = "WikiDataInfoOnUsers"
+        userToCountryAssociations = analyzeLocationDataCountry(port, db_name, collectionNameRead, QnodeToLabel, QnodeToCountry, QnodeToCountryISO)
+        userToCountryTop = {}
+        for user in userToCountryAssociations:
+            d = userToCountryAssociations[user]
+            if len(d) > 0:
+                topCountry = sorted(d.items(), key=lambda x: x[1], reverse=True)[0][0]
+                userToCountryTop[user] = topCountry
+         
+SocialBakers is a commercial website which provides top 100 Twitter user accounts for many countries around the world. These accounts were scrapped off the site. There is no info on how SocialBakers comes up with its methodology.
 
-Step 6: We are interested in all QNodes with coordinates 
+![image](https://user-images.githubusercontent.com/80060152/152063263-1b0a3a1c-fa4d-400c-81b1-79fa6b94029c.png)
+
+On SocialBakers more well known accounts are listed like celebrities, major news, and others for which a Wikipedia page is likely to exist. As a result across the 13,574 users listed on SocialBakers 4,536 can be found on Wikidata or (25%). Of these users the country from Wikidata matches in 88.64% of cases. Advantage in WikiData is it goes beyond country data and in many cases lists city as well as a lot of other information. From preliminary review we find that for SocialBakers born in seems to be the predominant feature i.e. even though person educated in, lives in, and works in USA they will be associated with Russia if that is where they were born. This was just a simple case of how a WikiData dump can be utilized to gain additional data.
