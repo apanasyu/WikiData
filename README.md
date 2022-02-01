@@ -55,14 +55,43 @@ Go through downloaded bz2 file line by line and see if a Twitter person is menti
 
 This step could take over 24 hours to execute. It results in a much more manageable file. File is TwitterRelatedRecords.json and is 5.3 GB.
 
-Step 2: The TwitterRelatedRecords.json from step 1 is used. We go through file line by line and record the Twitter user name and WikiData properties of interest to MongoDB for ease of querying. On linux we create a separate folder that will contain MongoDB files and call this command from terminal to setup an instance of MongoDB on port 27020: sudo mongod --port 27020 --dbpath "/media/aleksei1985/Seagate Expansion Drive/MongoDBWikiData/" (reader should have MongoDB running on 27020 pointing to their instance)
+Step 2a:
+There are 9,288 Wikidata properties. We utilize SPARQLQueryDirectly.py method getAllPropertiesFile() in order to get all of the properties, with code shown below:
 
-First there are close to 10,000 Wikidata properties (9288).
+    folderOut = 'Wiki/'
+
+    df_record_all = pd.DataFrame(
+        columns=['property', 'propertyLabel', 'propertyDescription', 'altLabel_list'])
+
+    query =  '''
+    SELECT ?property ?propertyLabel ?propertyDescription (GROUP_CONCAT(DISTINCT(?altLabel); separator = ", ") AS ?altLabel_list) WHERE {
+        ?property a wikibase:Property .
+        OPTIONAL { ?property skos:altLabel ?altLabel . FILTER (lang(?altLabel) = "en") }
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "en" .}
+    }
+    GROUP BY ?property ?propertyLabel ?propertyDescription
+    '''
+    data = executeWikiQuery(query)
+
+    columns = data["head"]
+    results = data["results"]["bindings"]
+    i = 0
+    for property in results:
+        df_record = pd.DataFrame(
+            {'property': pydash.get(property, 'property.value'),
+             'propertyLabel': pydash.get(property, 'propertyLabel.value'),
+             'propertyDescription': pydash.get(property, 'propertyDescription.value'),
+             'altLabel_list': pydash.get(property, 'altLabel_list.value')}, index=[i])
+        df_record_all = df_record_all.append(df_record, ignore_index=True)
+        i += 1
+
+    pd.DataFrame.to_csv(df_record_all, path_or_buf=folderOut + 'WikiDataProperties.csv')
+    
 We utilize SPARQLQueryDirectly.py method getPropertyUsagePerTwitterUser() in order to focus on most popular Wikidata properties for pages that have a social media Twitter account. An Excel spreadsheet is generated that contains the property, property English description, how many Twitter users contained the property. Here is a snapshot of top properties:
 ![image](https://user-images.githubusercontent.com/80060152/148464723-f68e9441-a1d3-40b6-9439-476360abdf2e.png)
 
-We went through the first ~400 most popular properties. These properties are recorded in WikiDataPropertiesOfInterest.py
-The properties that were found useful are recorded in MongoDB (the same exercise can be performed for other Social media or other Wikidata pages with reader having to filter out properties that would be useful for their application).
+Step 2b: The TwitterRelatedRecords.json from step 1 is used. We go through file line by line and record the Twitter user name and WikiData properties of interest to MongoDB for ease of querying. We went through the first ~400 most popular properties and record those of interest in WikiDataPropertiesOfInterest.py
+The properties that were found useful are recorded in MongoDB (the same exercise can be performed for other Social media or other Wikidata pages with reader having to filter out properties that would be useful for their application). On linux we create a separate folder that will contain MongoDB files and call this command from terminal to setup an instance of MongoDB on port 27020: sudo mongod --port 27020 --dbpath "/media/aleksei1985/Seagate Expansion Drive/MongoDBWikiData/" (reader should have MongoDB running on 27020 pointing to their instance).
 
 Here is a snapshot of this MongoDB table being explored using MongoDB compass:
 ![image](https://user-images.githubusercontent.com/80060152/149199336-62d252fd-fd4a-471b-a255-51f52820694a.png)
