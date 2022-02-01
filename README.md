@@ -28,9 +28,9 @@ Working with file will be done via methods in WorkWithWikiJSONDump.py
 Step 1: This step produces a file that now contains only WikiData pages that mention a Twitter user name. A lot of WikiData is related to stars, chemicals, and other info that is not relevant to our use case.
 
 Go through downloaded bz2 file line by line and see if a Twitter person is mentioned (looking for P2002, if we wanted to focus on Facebook would use P2013, for Instagram P2003, and so on):
-WikiOriginalFilepath = '/home/aleksei1985/Downloads/latest-all.json.bz2'
-ModWikiDumpPath = '/home/aleksei1985/Desktop/WikiFiles/TwitterRelatedRecords.json'
 
+        WikiOriginalFilepath = '/home/aleksei1985/Downloads/latest-all.json.bz2'
+        ModWikiDumpPath = '/home/aleksei1985/Desktop/WikiFiles/TwitterRelatedRecords.json'
         import os
         if not os.path.exists(ModWikiDumpPath):
             i = 0
