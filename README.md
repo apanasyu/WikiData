@@ -28,19 +28,30 @@ Working with file will be done via methods in WorkWithWikiJSONDump.py
 Step 1: This step produces a file that now contains only WikiData pages that mention a Twitter user name. A lot of WikiData is related to stars, chemicals, and other info that is not relevant to our use case.
 
 Go through downloaded bz2 file line by line and see if a Twitter person is mentioned (looking for P2002, if we wanted to focus on Facebook would use P2013, for Instagram P2003, and so on):
+WikiOriginalFilepath = '/home/aleksei1985/Downloads/latest-all.json.bz2'
+ModWikiDumpPath = '/home/aleksei1985/Desktop/WikiFiles/TwitterRelatedRecords.json'
 
-        with open(ModWikiDumpPath, 'w') as fWrite:
-            with bz2.open(WikiOriginalFilepath, mode='rt') as fRead:
-                firstTwoBytes = fRead.read(2)  # skip first two bytes: "[\n"
-                fWrite.write(firstTwoBytes)
-                for line in fRead:
-                    try:
-                        record = json.loads(line.rstrip(',\n'))
-                        if pydash.has(record, 'claims.P2002'):  # P2002 = Twitter Name
-                            fWrite.write(line)
-                    except json.decoder.JSONDecodeError:
-                        continue
-            fWrite.write("]\n")
+        import os
+        if not os.path.exists(ModWikiDumpPath):
+            i = 0
+            with open(ModWikiDumpPath, 'w') as fWrite:
+                with bz2.open(WikiOriginalFilepath, mode='rt') as fRead:
+                    firstTwoBytes = fRead.read(2)  # skip first two bytes: "[\n"
+                    fWrite.write(firstTwoBytes)
+                    for line in fRead:
+                        try:
+                            record = json.loads(line.rstrip(',\n'))
+                            if pydash.has(record, 'claims.P2002'):  # P2002 = Twitter Name
+                                fWrite.write(line)
+                                i += 1
+                                print(i)
+                        except json.decoder.JSONDecodeError:
+                            continue
+                fWrite.write("]\n")
+
+            print("Written " + str(i) + " records to " + ModWikiDumpPath)
+        else:
+            print("File " + ModWikiDumpPath + " already exists")
 
 This step could take over 24 hours to execute. It results in a much more manageable file. File is TwitterRelatedRecords.json and is 5.3 GB.
 
