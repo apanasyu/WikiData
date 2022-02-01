@@ -4,6 +4,7 @@ All of the Wikidata Property IDs can be found via query: query ?item wdt:P31 wd:
 ![image](https://user-images.githubusercontent.com/80060152/148462393-55e0a641-3771-43eb-bed1-810373489f15.png)
 
 Here are the top 10 out of 64 most popular social media accounts to be listed (for query from November 2021):
+
         id	Number Wiki Pages	English Label
         P2002	299220	                Twitter username
         P2013	210258	                Facebook ID
@@ -15,6 +16,7 @@ Here are the top 10 out of 64 most popular social media accounts to be listed (f
         P3579	7181	                Sina Weibo user ID
         P2037	7121	                GitHub username
         P3185	6804	                VK ID
+        
 As the table shows Twitter, Facebook, and Instagram are by far the most popular.
 
 # Working with WikiData
