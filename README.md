@@ -90,7 +90,7 @@ There are 9,288 Wikidata properties. We utilize SPARQLQueryDirectly.py method ge
 We utilize SPARQLQueryDirectly.py method getPropertyUsagePerTwitterUser() in order to focus on most popular Wikidata properties for pages that have a social media Twitter account. An Excel spreadsheet is generated that contains the property, property English description, how many Twitter users contained the property. Here is a snapshot of top properties:
 ![image](https://user-images.githubusercontent.com/80060152/148464723-f68e9441-a1d3-40b6-9439-476360abdf2e.png)
 
-Step 2b: The TwitterRelatedRecords.json from step 1 is used. We go through file line by line and record the Twitter user name and WikiData properties of interest to MongoDB for ease of querying. We went through the first ~400 most popular properties and record those of interest in WikiDataPropertiesOfInterest.py
+Step 2b: We went through the first ~400 most popular properties and record those of interest in WikiDataPropertiesOfInterest.py
 The properties that were found useful are recorded in MongoDB (the same exercise can be performed for other Social media or other Wikidata pages with reader having to filter out properties that would be useful for their application). On linux we create a separate folder that will contain MongoDB files and call this command from terminal to setup an instance of MongoDB on port 27020: sudo mongod --port 27020 --dbpath "/media/aleksei1985/Seagate Expansion Drive/MongoDBWikiData/" (reader should have MongoDB running on 27020 pointing to their instance).
 
 Here is a snapshot of this MongoDB table being explored using MongoDB compass:
