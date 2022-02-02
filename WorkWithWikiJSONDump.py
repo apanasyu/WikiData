@@ -463,7 +463,7 @@ if __name__ == '__main__':
                 topCountry = sorted(d.items(), key=lambda x: x[1], reverse=True)[0][0]
                 userToCountryTop[user] = topCountry
 
-            with open('Input/'+'countryISO3toSocialBakersTopN.pickle', 'rb') as handle:
+            with open('countryISO3toSocialBakersTopN.pickle', 'rb') as handle:
                 countryISO3toSocialBakersTopN = pickle.load(handle)
 
         #social bakers eval
