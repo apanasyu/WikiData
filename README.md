@@ -20,6 +20,9 @@ Here are the top 10 out of 64 most popular social media accounts to be listed (f
 As the table shows Twitter, Facebook, and Instagram are by far the most popular.
 
 # Working with WikiData
+
+All of the steps can be executed in WorkWithWikiJSONDump.py (that is our main file).
+
 Step 0: Download the latest WikiData dump as a .json.bz2 file from:
 https://dumps.wikimedia.org/wikidatawiki/entities/
 This is a 72 GB file as of Jan 6 2022.
