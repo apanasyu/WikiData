@@ -15,7 +15,7 @@ In order to get the number of pages related to P2002 (Twitter) do:
             }
             '''
 
-(in a similar fashion such query was automatically performed for each platform id: P2013, P2003, and so on to get the table below showing the top most popular social media accounts (queried in November 2021):
+In a similar fashion such query was automatically performed for each platform id: P2013, P2003, and so on to get the table below showing the top most popular social media accounts (queried in November 2021):
 
         id	Number Wiki Pages	English Label
         P2002	299220	                Twitter username
