@@ -17,7 +17,7 @@ Here are the top 10 out of 64 most popular social media accounts to be listed (f
         P2037	7121	                GitHub username
         P3185	6804	                VK ID
         
-As the table shows Twitter, Facebook, and Instagram are by far the most popular.
+As the table shows Twitter, Facebook, and Instagram are by far the most popular. The numbers of pages with Social media account fluctuates. At any time to get most up to date counts do: 
 
 # Working with WikiData
 
