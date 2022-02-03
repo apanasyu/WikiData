@@ -1,3 +1,5 @@
+This page designed to show how to utilize WikiData to gain additional data related to Twitter or other social media accounts. We are using both SPARQL queries and Wikidata json.bz2 dumps (we are working with WikiData without any external libraries so as to illustrate how this can be done directly). The extracted info is stored in MongoDB. We are utilizing the country that the Twitter user is associated with to compare against top 100 users per country from SocialBakers.com (which were collected around 2018 timeframe).
+
 # Social Media Types
 We are focussing on Twitter because it is the most popular. See file SPARQLQueryDirectly.py function recordSocialSiteInfo():
 All of the Wikidata Property IDs can be found via query: query ?item wdt:P31 wd:Q105388954
