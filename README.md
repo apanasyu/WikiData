@@ -29,7 +29,7 @@ In order to get the number of pages related to P2002 (Twitter) do:
         P2037	7121	                GitHub username
         P3185	6804	                VK ID
         
-As the table shows Twitter, Facebook, and Instagram are by far the most popular. The numbers of pages with Social media account fluctuates. In order to get the indi
+As the table shows Twitter, Facebook, and Instagram are by far the most popular. The numbers of pages with Social media account fluctuates (SPARQLQueryDirectly.py contains code for automatically repeating these steps).
 
 # Working with WikiData
 
