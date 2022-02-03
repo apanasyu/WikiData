@@ -5,7 +5,17 @@ We are focussing on Twitter because it is the most popular. See file SPARQLQuery
 All of the Wikidata Property IDs can be found via query: query ?item wdt:P31 wd:Q105388954
 ![image](https://user-images.githubusercontent.com/80060152/148462393-55e0a641-3771-43eb-bed1-810373489f15.png)
 
-Here are the top 10 out of 64 most popular social media accounts to be listed (for query from November 2021):
+In order to get the number of pages related to P2002 (Twitter) do:
+
+    query = '''
+            SELECT (COUNT (distinct ?x) AS ?count)
+            WHERE
+            {
+              ?x wdt:P2002 ?y
+            }
+            '''
+
+(in a similar fashion such query was automatically performed for each platform id: P2013, P2003, and so on to get the table below showing the top most popular social media accounts (queried in November 2021):
 
         id	Number Wiki Pages	English Label
         P2002	299220	                Twitter username
@@ -19,7 +29,7 @@ Here are the top 10 out of 64 most popular social media accounts to be listed (f
         P2037	7121	                GitHub username
         P3185	6804	                VK ID
         
-As the table shows Twitter, Facebook, and Instagram are by far the most popular. The numbers of pages with Social media account fluctuates. At any time to get most up to date counts do: 
+As the table shows Twitter, Facebook, and Instagram are by far the most popular. The numbers of pages with Social media account fluctuates. In order to get the indi
 
 # Working with WikiData
 
